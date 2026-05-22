@@ -1,0 +1,1554 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="FineSync">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DUM" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="REL" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FineSyncResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FineSyncResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InizioSync">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InizioSyncResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InizioSyncResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="APPRichiestaAbilitazione">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="APPRichiestaAbilitazioneResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APPRichiestaAbilitazioneResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="APPGetUtenti">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DUM" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="APPGetUtentiResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APPGetUtentiResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="APPGetRapportiniClienti">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DUM" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="APPGetRapportiniClientiResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APPGetRapportiniClientiResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="APPGetRapportiniClientiSedi">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DUM" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="APPGetRapportiniClientiSediResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APPGetRapportiniClientiSediResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="APPGetRapportiniClientiSediSpese">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DUM" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="APPGetRapportiniClientiSediSpeseResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APPGetRapportiniClientiSediSpeseResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="APPGetRapportiniClientiSediSoggetti">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DUM" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="APPGetRapportiniClientiSediSoggettiResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APPGetRapportiniClientiSediSoggettiResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="APPGetRapportiniNoteSpeseTipi">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DUM" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="APPGetRapportiniNoteSpeseTipiResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APPGetRapportiniNoteSpeseTipiResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="APPGetRapportiniCommesse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DUM" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="APPGetRapportiniCommesseResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APPGetRapportiniCommesseResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="APPGetRapporti">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DUM" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="APPGetRapportiResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APPGetRapportiResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="APPPutRapporti">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DUM" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="REC" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Content" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Content1" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Content2" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Content3" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Content4" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Content5" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="APPPutRapportiResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APPPutRapportiResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="APPPutRapportiFromDomino">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DUM" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="REC" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Content" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Content1" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Content2" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Content3" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Content4" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Content5" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="APPPutRapportiFromDominoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APPPutRapportiFromDominoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="APPGetAutorizzazioniTelegram">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DUM" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="APPGetAutorizzazioniTelegramResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APPGetAutorizzazioniTelegramResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="APPPutRapportiFromTelegram">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DUM" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="REC" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Content" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="APPPutRapportiFromTelegramResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APPPutRapportiFromTelegramResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="APPGetRapportiSpese">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DUM" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="APPGetRapportiSpeseResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APPGetRapportiSpeseResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UploadFirmaSoggetto">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DUM" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="REC" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Content" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UploadFirmaSoggettoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UploadFirmaSoggettoResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDominoData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DUM" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="REC" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDominoDataResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetDominoDataQuery">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DUM" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="REC" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDominoDataQueryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDominoDataQueryResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="APPGetBARCODEFamiglie">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DUM" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="APPGetBARCODEFamiglieResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APPGetBARCODEFamiglieResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="APPPutBARCODE">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DUM" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="REC" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Content1" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Content2" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="APPPutBARCODEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APPPutBARCODEResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="APPGetBARCODE">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DUM" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="REC" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="APPGetBARCODEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APPGetBARCODEResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="APPPutTimbratura">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DUM" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="REC" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="APPPutTimbraturaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APPPutTimbraturaResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SOSCli">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SOSCliResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SOSCliResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SOSCal">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SOSCalResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SOSCalResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SOSRep">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SOSRepResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SOSRepResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SOSCom">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SOSComResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SOSComResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SOSCRe">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SOSCReResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SOSCReResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SOSRap">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SOSRapResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SOSRapResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SOSSog">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SOSSogResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SOSSogResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="FineSyncSoapIn">
+    <wsdl:part name="parameters" element="tns:FineSync" />
+  </wsdl:message>
+  <wsdl:message name="FineSyncSoapOut">
+    <wsdl:part name="parameters" element="tns:FineSyncResponse" />
+  </wsdl:message>
+  <wsdl:message name="InizioSyncSoapIn">
+    <wsdl:part name="parameters" element="tns:InizioSync" />
+  </wsdl:message>
+  <wsdl:message name="InizioSyncSoapOut">
+    <wsdl:part name="parameters" element="tns:InizioSyncResponse" />
+  </wsdl:message>
+  <wsdl:message name="APPRichiestaAbilitazioneSoapIn">
+    <wsdl:part name="parameters" element="tns:APPRichiestaAbilitazione" />
+  </wsdl:message>
+  <wsdl:message name="APPRichiestaAbilitazioneSoapOut">
+    <wsdl:part name="parameters" element="tns:APPRichiestaAbilitazioneResponse" />
+  </wsdl:message>
+  <wsdl:message name="APPGetUtentiSoapIn">
+    <wsdl:part name="parameters" element="tns:APPGetUtenti" />
+  </wsdl:message>
+  <wsdl:message name="APPGetUtentiSoapOut">
+    <wsdl:part name="parameters" element="tns:APPGetUtentiResponse" />
+  </wsdl:message>
+  <wsdl:message name="APPGetRapportiniClientiSoapIn">
+    <wsdl:part name="parameters" element="tns:APPGetRapportiniClienti" />
+  </wsdl:message>
+  <wsdl:message name="APPGetRapportiniClientiSoapOut">
+    <wsdl:part name="parameters" element="tns:APPGetRapportiniClientiResponse" />
+  </wsdl:message>
+  <wsdl:message name="APPGetRapportiniClientiSediSoapIn">
+    <wsdl:part name="parameters" element="tns:APPGetRapportiniClientiSedi" />
+  </wsdl:message>
+  <wsdl:message name="APPGetRapportiniClientiSediSoapOut">
+    <wsdl:part name="parameters" element="tns:APPGetRapportiniClientiSediResponse" />
+  </wsdl:message>
+  <wsdl:message name="APPGetRapportiniClientiSediSpeseSoapIn">
+    <wsdl:part name="parameters" element="tns:APPGetRapportiniClientiSediSpese" />
+  </wsdl:message>
+  <wsdl:message name="APPGetRapportiniClientiSediSpeseSoapOut">
+    <wsdl:part name="parameters" element="tns:APPGetRapportiniClientiSediSpeseResponse" />
+  </wsdl:message>
+  <wsdl:message name="APPGetRapportiniClientiSediSoggettiSoapIn">
+    <wsdl:part name="parameters" element="tns:APPGetRapportiniClientiSediSoggetti" />
+  </wsdl:message>
+  <wsdl:message name="APPGetRapportiniClientiSediSoggettiSoapOut">
+    <wsdl:part name="parameters" element="tns:APPGetRapportiniClientiSediSoggettiResponse" />
+  </wsdl:message>
+  <wsdl:message name="APPGetRapportiniNoteSpeseTipiSoapIn">
+    <wsdl:part name="parameters" element="tns:APPGetRapportiniNoteSpeseTipi" />
+  </wsdl:message>
+  <wsdl:message name="APPGetRapportiniNoteSpeseTipiSoapOut">
+    <wsdl:part name="parameters" element="tns:APPGetRapportiniNoteSpeseTipiResponse" />
+  </wsdl:message>
+  <wsdl:message name="APPGetRapportiniCommesseSoapIn">
+    <wsdl:part name="parameters" element="tns:APPGetRapportiniCommesse" />
+  </wsdl:message>
+  <wsdl:message name="APPGetRapportiniCommesseSoapOut">
+    <wsdl:part name="parameters" element="tns:APPGetRapportiniCommesseResponse" />
+  </wsdl:message>
+  <wsdl:message name="APPGetRapportiSoapIn">
+    <wsdl:part name="parameters" element="tns:APPGetRapporti" />
+  </wsdl:message>
+  <wsdl:message name="APPGetRapportiSoapOut">
+    <wsdl:part name="parameters" element="tns:APPGetRapportiResponse" />
+  </wsdl:message>
+  <wsdl:message name="APPPutRapportiSoapIn">
+    <wsdl:part name="parameters" element="tns:APPPutRapporti" />
+  </wsdl:message>
+  <wsdl:message name="APPPutRapportiSoapOut">
+    <wsdl:part name="parameters" element="tns:APPPutRapportiResponse" />
+  </wsdl:message>
+  <wsdl:message name="APPPutRapportiFromDominoSoapIn">
+    <wsdl:part name="parameters" element="tns:APPPutRapportiFromDomino" />
+  </wsdl:message>
+  <wsdl:message name="APPPutRapportiFromDominoSoapOut">
+    <wsdl:part name="parameters" element="tns:APPPutRapportiFromDominoResponse" />
+  </wsdl:message>
+  <wsdl:message name="APPGetAutorizzazioniTelegramSoapIn">
+    <wsdl:part name="parameters" element="tns:APPGetAutorizzazioniTelegram" />
+  </wsdl:message>
+  <wsdl:message name="APPGetAutorizzazioniTelegramSoapOut">
+    <wsdl:part name="parameters" element="tns:APPGetAutorizzazioniTelegramResponse" />
+  </wsdl:message>
+  <wsdl:message name="APPPutRapportiFromTelegramSoapIn">
+    <wsdl:part name="parameters" element="tns:APPPutRapportiFromTelegram" />
+  </wsdl:message>
+  <wsdl:message name="APPPutRapportiFromTelegramSoapOut">
+    <wsdl:part name="parameters" element="tns:APPPutRapportiFromTelegramResponse" />
+  </wsdl:message>
+  <wsdl:message name="APPGetRapportiSpeseSoapIn">
+    <wsdl:part name="parameters" element="tns:APPGetRapportiSpese" />
+  </wsdl:message>
+  <wsdl:message name="APPGetRapportiSpeseSoapOut">
+    <wsdl:part name="parameters" element="tns:APPGetRapportiSpeseResponse" />
+  </wsdl:message>
+  <wsdl:message name="UploadFirmaSoggettoSoapIn">
+    <wsdl:part name="parameters" element="tns:UploadFirmaSoggetto" />
+  </wsdl:message>
+  <wsdl:message name="UploadFirmaSoggettoSoapOut">
+    <wsdl:part name="parameters" element="tns:UploadFirmaSoggettoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDominoDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDominoData" />
+  </wsdl:message>
+  <wsdl:message name="GetDominoDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDominoDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDominoDataQuerySoapIn">
+    <wsdl:part name="parameters" element="tns:GetDominoDataQuery" />
+  </wsdl:message>
+  <wsdl:message name="GetDominoDataQuerySoapOut">
+    <wsdl:part name="parameters" element="tns:GetDominoDataQueryResponse" />
+  </wsdl:message>
+  <wsdl:message name="APPGetBARCODEFamiglieSoapIn">
+    <wsdl:part name="parameters" element="tns:APPGetBARCODEFamiglie" />
+  </wsdl:message>
+  <wsdl:message name="APPGetBARCODEFamiglieSoapOut">
+    <wsdl:part name="parameters" element="tns:APPGetBARCODEFamiglieResponse" />
+  </wsdl:message>
+  <wsdl:message name="APPPutBARCODESoapIn">
+    <wsdl:part name="parameters" element="tns:APPPutBARCODE" />
+  </wsdl:message>
+  <wsdl:message name="APPPutBARCODESoapOut">
+    <wsdl:part name="parameters" element="tns:APPPutBARCODEResponse" />
+  </wsdl:message>
+  <wsdl:message name="APPGetBARCODESoapIn">
+    <wsdl:part name="parameters" element="tns:APPGetBARCODE" />
+  </wsdl:message>
+  <wsdl:message name="APPGetBARCODESoapOut">
+    <wsdl:part name="parameters" element="tns:APPGetBARCODEResponse" />
+  </wsdl:message>
+  <wsdl:message name="APPPutTimbraturaSoapIn">
+    <wsdl:part name="parameters" element="tns:APPPutTimbratura" />
+  </wsdl:message>
+  <wsdl:message name="APPPutTimbraturaSoapOut">
+    <wsdl:part name="parameters" element="tns:APPPutTimbraturaResponse" />
+  </wsdl:message>
+  <wsdl:message name="SOSCliSoapIn">
+    <wsdl:part name="parameters" element="tns:SOSCli" />
+  </wsdl:message>
+  <wsdl:message name="SOSCliSoapOut">
+    <wsdl:part name="parameters" element="tns:SOSCliResponse" />
+  </wsdl:message>
+  <wsdl:message name="SOSCalSoapIn">
+    <wsdl:part name="parameters" element="tns:SOSCal" />
+  </wsdl:message>
+  <wsdl:message name="SOSCalSoapOut">
+    <wsdl:part name="parameters" element="tns:SOSCalResponse" />
+  </wsdl:message>
+  <wsdl:message name="SOSRepSoapIn">
+    <wsdl:part name="parameters" element="tns:SOSRep" />
+  </wsdl:message>
+  <wsdl:message name="SOSRepSoapOut">
+    <wsdl:part name="parameters" element="tns:SOSRepResponse" />
+  </wsdl:message>
+  <wsdl:message name="SOSComSoapIn">
+    <wsdl:part name="parameters" element="tns:SOSCom" />
+  </wsdl:message>
+  <wsdl:message name="SOSComSoapOut">
+    <wsdl:part name="parameters" element="tns:SOSComResponse" />
+  </wsdl:message>
+  <wsdl:message name="SOSCReSoapIn">
+    <wsdl:part name="parameters" element="tns:SOSCRe" />
+  </wsdl:message>
+  <wsdl:message name="SOSCReSoapOut">
+    <wsdl:part name="parameters" element="tns:SOSCReResponse" />
+  </wsdl:message>
+  <wsdl:message name="SOSRapSoapIn">
+    <wsdl:part name="parameters" element="tns:SOSRap" />
+  </wsdl:message>
+  <wsdl:message name="SOSRapSoapOut">
+    <wsdl:part name="parameters" element="tns:SOSRapResponse" />
+  </wsdl:message>
+  <wsdl:message name="SOSSogSoapIn">
+    <wsdl:part name="parameters" element="tns:SOSSog" />
+  </wsdl:message>
+  <wsdl:message name="SOSSogSoapOut">
+    <wsdl:part name="parameters" element="tns:SOSSogResponse" />
+  </wsdl:message>
+  <wsdl:portType name="SyncMobileSoap">
+    <wsdl:operation name="FineSync">
+      <wsdl:input message="tns:FineSyncSoapIn" />
+      <wsdl:output message="tns:FineSyncSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InizioSync">
+      <wsdl:input message="tns:InizioSyncSoapIn" />
+      <wsdl:output message="tns:InizioSyncSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="APPRichiestaAbilitazione">
+      <wsdl:input message="tns:APPRichiestaAbilitazioneSoapIn" />
+      <wsdl:output message="tns:APPRichiestaAbilitazioneSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="APPGetUtenti">
+      <wsdl:input message="tns:APPGetUtentiSoapIn" />
+      <wsdl:output message="tns:APPGetUtentiSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="APPGetRapportiniClienti">
+      <wsdl:input message="tns:APPGetRapportiniClientiSoapIn" />
+      <wsdl:output message="tns:APPGetRapportiniClientiSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="APPGetRapportiniClientiSedi">
+      <wsdl:input message="tns:APPGetRapportiniClientiSediSoapIn" />
+      <wsdl:output message="tns:APPGetRapportiniClientiSediSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="APPGetRapportiniClientiSediSpese">
+      <wsdl:input message="tns:APPGetRapportiniClientiSediSpeseSoapIn" />
+      <wsdl:output message="tns:APPGetRapportiniClientiSediSpeseSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="APPGetRapportiniClientiSediSoggetti">
+      <wsdl:input message="tns:APPGetRapportiniClientiSediSoggettiSoapIn" />
+      <wsdl:output message="tns:APPGetRapportiniClientiSediSoggettiSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="APPGetRapportiniNoteSpeseTipi">
+      <wsdl:input message="tns:APPGetRapportiniNoteSpeseTipiSoapIn" />
+      <wsdl:output message="tns:APPGetRapportiniNoteSpeseTipiSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="APPGetRapportiniCommesse">
+      <wsdl:input message="tns:APPGetRapportiniCommesseSoapIn" />
+      <wsdl:output message="tns:APPGetRapportiniCommesseSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="APPGetRapporti">
+      <wsdl:input message="tns:APPGetRapportiSoapIn" />
+      <wsdl:output message="tns:APPGetRapportiSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="APPPutRapporti">
+      <wsdl:input message="tns:APPPutRapportiSoapIn" />
+      <wsdl:output message="tns:APPPutRapportiSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="APPPutRapportiFromDomino">
+      <wsdl:input message="tns:APPPutRapportiFromDominoSoapIn" />
+      <wsdl:output message="tns:APPPutRapportiFromDominoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="APPGetAutorizzazioniTelegram">
+      <wsdl:input message="tns:APPGetAutorizzazioniTelegramSoapIn" />
+      <wsdl:output message="tns:APPGetAutorizzazioniTelegramSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="APPPutRapportiFromTelegram">
+      <wsdl:input message="tns:APPPutRapportiFromTelegramSoapIn" />
+      <wsdl:output message="tns:APPPutRapportiFromTelegramSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="APPGetRapportiSpese">
+      <wsdl:input message="tns:APPGetRapportiSpeseSoapIn" />
+      <wsdl:output message="tns:APPGetRapportiSpeseSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UploadFirmaSoggetto">
+      <wsdl:input message="tns:UploadFirmaSoggettoSoapIn" />
+      <wsdl:output message="tns:UploadFirmaSoggettoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDominoData">
+      <wsdl:input message="tns:GetDominoDataSoapIn" />
+      <wsdl:output message="tns:GetDominoDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDominoDataQuery">
+      <wsdl:input message="tns:GetDominoDataQuerySoapIn" />
+      <wsdl:output message="tns:GetDominoDataQuerySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="APPGetBARCODEFamiglie">
+      <wsdl:input message="tns:APPGetBARCODEFamiglieSoapIn" />
+      <wsdl:output message="tns:APPGetBARCODEFamiglieSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="APPPutBARCODE">
+      <wsdl:input message="tns:APPPutBARCODESoapIn" />
+      <wsdl:output message="tns:APPPutBARCODESoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="APPGetBARCODE">
+      <wsdl:input message="tns:APPGetBARCODESoapIn" />
+      <wsdl:output message="tns:APPGetBARCODESoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="APPPutTimbratura">
+      <wsdl:input message="tns:APPPutTimbraturaSoapIn" />
+      <wsdl:output message="tns:APPPutTimbraturaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SOSCli">
+      <wsdl:input message="tns:SOSCliSoapIn" />
+      <wsdl:output message="tns:SOSCliSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SOSCal">
+      <wsdl:input message="tns:SOSCalSoapIn" />
+      <wsdl:output message="tns:SOSCalSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SOSRep">
+      <wsdl:input message="tns:SOSRepSoapIn" />
+      <wsdl:output message="tns:SOSRepSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SOSCom">
+      <wsdl:input message="tns:SOSComSoapIn" />
+      <wsdl:output message="tns:SOSComSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SOSCRe">
+      <wsdl:input message="tns:SOSCReSoapIn" />
+      <wsdl:output message="tns:SOSCReSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SOSRap">
+      <wsdl:input message="tns:SOSRapSoapIn" />
+      <wsdl:output message="tns:SOSRapSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SOSSog">
+      <wsdl:input message="tns:SOSSogSoapIn" />
+      <wsdl:output message="tns:SOSSogSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SyncMobileSoap" type="tns:SyncMobileSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="FineSync">
+      <soap:operation soapAction="http://tempuri.org/FineSync" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InizioSync">
+      <soap:operation soapAction="http://tempuri.org/InizioSync" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="APPRichiestaAbilitazione">
+      <soap:operation soapAction="http://tempuri.org/APPRichiestaAbilitazione" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="APPGetUtenti">
+      <soap:operation soapAction="http://tempuri.org/APPGetUtenti" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="APPGetRapportiniClienti">
+      <soap:operation soapAction="http://tempuri.org/APPGetRapportiniClienti" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="APPGetRapportiniClientiSedi">
+      <soap:operation soapAction="http://tempuri.org/APPGetRapportiniClientiSedi" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="APPGetRapportiniClientiSediSpese">
+      <soap:operation soapAction="http://tempuri.org/APPGetRapportiniClientiSediSpese" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="APPGetRapportiniClientiSediSoggetti">
+      <soap:operation soapAction="http://tempuri.org/APPGetRapportiniClientiSediSoggetti" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="APPGetRapportiniNoteSpeseTipi">
+      <soap:operation soapAction="http://tempuri.org/APPGetRapportiniNoteSpeseTipi" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="APPGetRapportiniCommesse">
+      <soap:operation soapAction="http://tempuri.org/APPGetRapportiniCommesse" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="APPGetRapporti">
+      <soap:operation soapAction="http://tempuri.org/APPGetRapporti" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="APPPutRapporti">
+      <soap:operation soapAction="http://tempuri.org/APPPutRapporti" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="APPPutRapportiFromDomino">
+      <soap:operation soapAction="http://tempuri.org/APPPutRapportiFromDomino" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="APPGetAutorizzazioniTelegram">
+      <soap:operation soapAction="http://tempuri.org/APPGetAutorizzazioniTelegram" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="APPPutRapportiFromTelegram">
+      <soap:operation soapAction="http://tempuri.org/APPPutRapportiFromTelegram" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="APPGetRapportiSpese">
+      <soap:operation soapAction="http://tempuri.org/APPGetRapportiSpese" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadFirmaSoggetto">
+      <soap:operation soapAction="http://tempuri.org/UploadFirmaSoggetto" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDominoData">
+      <soap:operation soapAction="http://tempuri.org/GetDominoData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDominoDataQuery">
+      <soap:operation soapAction="http://tempuri.org/GetDominoDataQuery" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="APPGetBARCODEFamiglie">
+      <soap:operation soapAction="http://tempuri.org/APPGetBARCODEFamiglie" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="APPPutBARCODE">
+      <soap:operation soapAction="http://tempuri.org/APPPutBARCODE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="APPGetBARCODE">
+      <soap:operation soapAction="http://tempuri.org/APPGetBARCODE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="APPPutTimbratura">
+      <soap:operation soapAction="http://tempuri.org/APPPutTimbratura" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SOSCli">
+      <soap:operation soapAction="http://tempuri.org/SOSCli" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SOSCal">
+      <soap:operation soapAction="http://tempuri.org/SOSCal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SOSRep">
+      <soap:operation soapAction="http://tempuri.org/SOSRep" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SOSCom">
+      <soap:operation soapAction="http://tempuri.org/SOSCom" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SOSCRe">
+      <soap:operation soapAction="http://tempuri.org/SOSCRe" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SOSRap">
+      <soap:operation soapAction="http://tempuri.org/SOSRap" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SOSSog">
+      <soap:operation soapAction="http://tempuri.org/SOSSog" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SyncMobileSoap12" type="tns:SyncMobileSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="FineSync">
+      <soap12:operation soapAction="http://tempuri.org/FineSync" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InizioSync">
+      <soap12:operation soapAction="http://tempuri.org/InizioSync" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="APPRichiestaAbilitazione">
+      <soap12:operation soapAction="http://tempuri.org/APPRichiestaAbilitazione" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="APPGetUtenti">
+      <soap12:operation soapAction="http://tempuri.org/APPGetUtenti" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="APPGetRapportiniClienti">
+      <soap12:operation soapAction="http://tempuri.org/APPGetRapportiniClienti" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="APPGetRapportiniClientiSedi">
+      <soap12:operation soapAction="http://tempuri.org/APPGetRapportiniClientiSedi" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="APPGetRapportiniClientiSediSpese">
+      <soap12:operation soapAction="http://tempuri.org/APPGetRapportiniClientiSediSpese" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="APPGetRapportiniClientiSediSoggetti">
+      <soap12:operation soapAction="http://tempuri.org/APPGetRapportiniClientiSediSoggetti" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="APPGetRapportiniNoteSpeseTipi">
+      <soap12:operation soapAction="http://tempuri.org/APPGetRapportiniNoteSpeseTipi" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="APPGetRapportiniCommesse">
+      <soap12:operation soapAction="http://tempuri.org/APPGetRapportiniCommesse" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="APPGetRapporti">
+      <soap12:operation soapAction="http://tempuri.org/APPGetRapporti" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="APPPutRapporti">
+      <soap12:operation soapAction="http://tempuri.org/APPPutRapporti" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="APPPutRapportiFromDomino">
+      <soap12:operation soapAction="http://tempuri.org/APPPutRapportiFromDomino" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="APPGetAutorizzazioniTelegram">
+      <soap12:operation soapAction="http://tempuri.org/APPGetAutorizzazioniTelegram" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="APPPutRapportiFromTelegram">
+      <soap12:operation soapAction="http://tempuri.org/APPPutRapportiFromTelegram" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="APPGetRapportiSpese">
+      <soap12:operation soapAction="http://tempuri.org/APPGetRapportiSpese" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadFirmaSoggetto">
+      <soap12:operation soapAction="http://tempuri.org/UploadFirmaSoggetto" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDominoData">
+      <soap12:operation soapAction="http://tempuri.org/GetDominoData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDominoDataQuery">
+      <soap12:operation soapAction="http://tempuri.org/GetDominoDataQuery" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="APPGetBARCODEFamiglie">
+      <soap12:operation soapAction="http://tempuri.org/APPGetBARCODEFamiglie" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="APPPutBARCODE">
+      <soap12:operation soapAction="http://tempuri.org/APPPutBARCODE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="APPGetBARCODE">
+      <soap12:operation soapAction="http://tempuri.org/APPGetBARCODE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="APPPutTimbratura">
+      <soap12:operation soapAction="http://tempuri.org/APPPutTimbratura" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SOSCli">
+      <soap12:operation soapAction="http://tempuri.org/SOSCli" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SOSCal">
+      <soap12:operation soapAction="http://tempuri.org/SOSCal" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SOSRep">
+      <soap12:operation soapAction="http://tempuri.org/SOSRep" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SOSCom">
+      <soap12:operation soapAction="http://tempuri.org/SOSCom" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SOSCRe">
+      <soap12:operation soapAction="http://tempuri.org/SOSCRe" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SOSRap">
+      <soap12:operation soapAction="http://tempuri.org/SOSRap" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SOSSog">
+      <soap12:operation soapAction="http://tempuri.org/SOSSog" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SyncMobile">
+    <wsdl:port name="SyncMobileSoap" binding="tns:SyncMobileSoap">
+      <soap:address location="https://servicewsmucini.besttool.it/syncdati.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SyncMobileSoap12" binding="tns:SyncMobileSoap12">
+      <soap12:address location="https://servicewsmucini.besttool.it/syncdati.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,28 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build output
+bin/
+obj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+
+# NuGet packages restored locally
+packages/
+
+# Local tools and tunnels
+.tools/
+
+# Local application configuration with secrets
+/btTelegramWebBot/Web.config
+
+# Logs and temporary files
+*.log
+*.tmp
+TestResults/

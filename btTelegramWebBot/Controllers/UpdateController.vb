@@ -779,7 +779,7 @@ Namespace btTelegramWebBot.Controllers
                     Dim reminderId = cmd.ExecuteScalar()
                     If reminderId Is Nothing OrElse Convert.IsDBNull(reminderId) Then Return False
 
-                    Using updateCmd As New OleDbCommand("update TelegramBotWorkLocationResponses set ResponseType = 'ALTRO', FreeText = ?, RespondedAt = ? where TelegramBotWorkLocationResponseId = ?", cn)
+                    Using updateCmd As New OleDbCommand("update TelegramBotWorkLocationResponses set ResponseType = 'ALTRO', [FreeText] = ?, RespondedAt = ? where TelegramBotWorkLocationResponseId = ?", cn)
                         updateCmd.Parameters.AddWithValue("@p1", text)
                         updateCmd.Parameters.AddWithValue("@p2", Date.Now)
                         updateCmd.Parameters.AddWithValue("@p3", reminderId)

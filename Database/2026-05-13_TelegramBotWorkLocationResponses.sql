@@ -13,7 +13,7 @@ BEGIN
         ResponseType NVARCHAR(30) NOT NULL,
         ClientiSediCodice INT NULL,
         ClientiSediDescrizione NVARCHAR(255) NULL,
-        FreeText NVARCHAR(1000) NULL,
+        [FreeText] NVARCHAR(1000) NULL,
         SentAt DATETIME NULL,
         RespondedAt DATETIME NULL,
         CreatedAt DATETIME NOT NULL

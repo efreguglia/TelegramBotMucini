@@ -531,7 +531,7 @@ Namespace btTelegramWebBot.Controllers
             Return JsonConvert.SerializeObject(New With {.inline_keyboard = keyboard})
         End Function
 
-        Private Function SendTelegramMessageWithReplyMarkup(ByVal chatId As String, ByVal text As String, ByVal replyMarkupJson As String) As String
+        Private Function SendTelegramMessageWithReplyMarkup(ByVal chatId As String, ByVal text As String, ByVal replyMarkupJson As String, Optional ByVal parseMode As String = "") As String
             Dim apiToken As String = ConfigurationManager.AppSettings("TelegramToken").ToString()
             Dim urlString = "https://api.telegram.org/bot" & apiToken & "/sendMessage"
 
@@ -540,6 +540,7 @@ Namespace btTelegramWebBot.Controllers
                 values("chat_id") = chatId
                 values("text") = text
                 values("reply_markup") = replyMarkupJson
+                If Not String.IsNullOrWhiteSpace(parseMode) Then values("parse_mode") = parseMode
 
                 Dim responseBytes = client.UploadValues(urlString, "POST", values)
                 Dim readerString = Encoding.UTF8.GetString(responseBytes)
@@ -548,6 +549,10 @@ Namespace btTelegramWebBot.Controllers
                 QueueBotMessageDeletion(chatId, messageId)
                 Return messageId
             End Using
+        End Function
+
+        Private Function SendTimesheetMessageWithReplyMarkup(ByVal chatId As String, ByVal text As String, ByVal replyMarkupJson As String) As String
+            Return SendTelegramMessageWithReplyMarkup(chatId, "<b>" & WebUtility.HtmlEncode(text) & "</b>", replyMarkupJson, "HTML")
         End Function
 
         Private Sub AnswerCallbackQuery(ByVal callbackQueryId As String)
@@ -1096,7 +1101,7 @@ Namespace btTelegramWebBot.Controllers
                 }
             })
 
-            SendTelegramMessageWithReplyMarkup(chatId, "Scegli la data del rapportino.", keyboard)
+            SendTimesheetMessageWithReplyMarkup(chatId, "Scegli la data del rapportino.", keyboard)
         End Sub
 
         Private Function BuildTimesheetCancelButtonRow(ByVal draftId As String) As Object()
@@ -1136,7 +1141,7 @@ Namespace btTelegramWebBot.Controllers
         Private Sub TimesheetAskCustomDate(ByVal chatId As String, ByVal draftId As String)
             UpdateTimesheetDraftStep(draftId, chatId, "WAIT_DATE")
             Dim keyboard = JsonConvert.SerializeObject(New With {.inline_keyboard = New Object() {BuildTimesheetCancelButtonRow(draftId)}})
-            SendTelegramMessageWithReplyMarkup(chatId, "Scrivi la data del rapportino nel formato gg/mm/aaaa.", keyboard)
+            SendTimesheetMessageWithReplyMarkup(chatId, "Scrivi la data del rapportino nel formato gg/mm/aaaa.", keyboard)
         End Sub
 
         Private Sub TimesheetAskReturnDate(ByVal chatId As String, ByVal draftId As String)
@@ -1154,13 +1159,13 @@ Namespace btTelegramWebBot.Controllers
                 }
             })
 
-            SendTelegramMessageWithReplyMarkup(chatId, "Che giorno torni?", keyboard)
+            SendTimesheetMessageWithReplyMarkup(chatId, "Che giorno torni?", keyboard)
         End Sub
 
         Private Sub TimesheetAskCustomReturnDate(ByVal chatId As String, ByVal draftId As String)
             UpdateTimesheetDraftStep(draftId, chatId, "WAIT_RETURN_DATE")
             Dim keyboard = JsonConvert.SerializeObject(New With {.inline_keyboard = New Object() {BuildTimesheetCancelButtonRow(draftId)}})
-            SendTelegramMessageWithReplyMarkup(chatId, "Scrivi il giorno di rientro nel formato gg/mm/aaaa.", keyboard)
+            SendTimesheetMessageWithReplyMarkup(chatId, "Scrivi il giorno di rientro nel formato gg/mm/aaaa.", keyboard)
         End Sub
 
         Private Sub TimesheetSetReturnDate(ByVal chatId As String, ByVal draftId As String, ByVal dataValue As String)
@@ -1205,13 +1210,13 @@ Namespace btTelegramWebBot.Controllers
             AddTimesheetCancelButton(keyboard, draftId)
 
             Dim dataRapporto = Convert.ToDateTime(draft.Rows(0).Item("RapportiData")).ToString("dd/MM/yyyy")
-            SendTelegramMessageWithReplyMarkup(chatId, "Data rapportino: " & dataRapporto & ". Scegli il cliente.", JsonConvert.SerializeObject(New With {.inline_keyboard = keyboard}))
+            SendTimesheetMessageWithReplyMarkup(chatId, "Data rapportino: " & dataRapporto & ". Scegli il cliente.", JsonConvert.SerializeObject(New With {.inline_keyboard = keyboard}))
         End Sub
 
         Private Sub TimesheetAskClientSearch(ByVal chatId As String, ByVal draftId As String)
             UpdateTimesheetDraftStep(draftId, chatId, "WAIT_CLIENT_SEARCH")
             Dim keyboard = JsonConvert.SerializeObject(New With {.inline_keyboard = New Object() {BuildTimesheetCancelButtonRow(draftId)}})
-            SendTelegramMessageWithReplyMarkup(chatId, "Scrivi una parte del nome cliente.", keyboard)
+            SendTimesheetMessageWithReplyMarkup(chatId, "Scrivi una parte del nome cliente.", keyboard)
         End Sub
 
         Private Sub TimesheetSetClient(ByVal chatId As String, ByVal draftId As String, ByVal clientiCodice As String)
@@ -1245,12 +1250,12 @@ Namespace btTelegramWebBot.Controllers
 
             If keyboard.Count = 0 Then
                 Dim cancelKeyboard = JsonConvert.SerializeObject(New With {.inline_keyboard = New Object() {BuildTimesheetCancelButtonRow(draftId)}})
-                SendTelegramMessageWithReplyMarkup(chatId, "Non ho trovato sedi per questo cliente.", cancelKeyboard)
+                SendTimesheetMessageWithReplyMarkup(chatId, "Non ho trovato sedi per questo cliente.", cancelKeyboard)
                 Exit Sub
             End If
 
             AddTimesheetCancelButton(keyboard, draftId)
-            SendTelegramMessageWithReplyMarkup(chatId, "Scegli la sede.", JsonConvert.SerializeObject(New With {.inline_keyboard = keyboard}))
+            SendTimesheetMessageWithReplyMarkup(chatId, "Scegli la sede.", JsonConvert.SerializeObject(New With {.inline_keyboard = keyboard}))
         End Sub
 
         Private Sub TimesheetSetSite(ByVal chatId As String, ByVal draftId As String, ByVal clientiSediCodice As String)
@@ -1263,7 +1268,7 @@ Namespace btTelegramWebBot.Controllers
             Next
 
             AddTimesheetCancelButton(keyboard, draftId)
-            SendTelegramMessageWithReplyMarkup(chatId, "Quante ore vuoi inserire?", JsonConvert.SerializeObject(New With {.inline_keyboard = keyboard}))
+            SendTimesheetMessageWithReplyMarkup(chatId, "Quante ore vuoi inserire?", JsonConvert.SerializeObject(New With {.inline_keyboard = keyboard}))
         End Sub
 
         Private Sub TimesheetSetHours(ByVal chatId As String, ByVal draftId As String, ByVal ore As String)
@@ -1275,7 +1280,7 @@ Namespace btTelegramWebBot.Controllers
 
             UpdateTimesheetDraftField(draftId, chatId, "Ore", oreInt, "WAIT_TEXT")
             Dim keyboard = JsonConvert.SerializeObject(New With {.inline_keyboard = New Object() {BuildTimesheetCancelButtonRow(draftId)}})
-            SendTelegramMessageWithReplyMarkup(chatId, "Scrivi il testo dell'attivita. Puoi digitarlo oppure usare la dettatura del telefono.", keyboard)
+            SendTimesheetMessageWithReplyMarkup(chatId, "Scrivi il testo dell'attivita. Puoi digitarlo oppure usare la dettatura del telefono.", keyboard)
         End Sub
 
         Private Function HandleTimesheetText(ByVal chatId As String, ByVal text As String) As Boolean
@@ -1290,7 +1295,7 @@ Namespace btTelegramWebBot.Controllers
                     Dim parsed As DateTime
                     If Not DateTime.TryParseExact(text.Trim(), "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, parsed) Then
                         Dim keyboard = JsonConvert.SerializeObject(New With {.inline_keyboard = New Object() {BuildTimesheetCancelButtonRow(draftId)}})
-                        SendTelegramMessageWithReplyMarkup(chatId, "Data non valida. Usa il formato gg/mm/aaaa.", keyboard)
+                        SendTimesheetMessageWithReplyMarkup(chatId, "Data non valida. Usa il formato gg/mm/aaaa.", keyboard)
                         Return True
                     End If
 
@@ -1301,7 +1306,7 @@ Namespace btTelegramWebBot.Controllers
                     Dim parsed As DateTime
                     If Not DateTime.TryParseExact(text.Trim(), "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, parsed) Then
                         Dim keyboard = JsonConvert.SerializeObject(New With {.inline_keyboard = New Object() {BuildTimesheetCancelButtonRow(draftId)}})
-                        SendTelegramMessageWithReplyMarkup(chatId, "Data non valida. Usa il formato gg/mm/aaaa.", keyboard)
+                        SendTimesheetMessageWithReplyMarkup(chatId, "Data non valida. Usa il formato gg/mm/aaaa.", keyboard)
                         Return True
                     End If
 
@@ -1341,12 +1346,12 @@ Namespace btTelegramWebBot.Controllers
 
             If keyboard.Count = 0 Then
                 Dim cancelKeyboard = JsonConvert.SerializeObject(New With {.inline_keyboard = New Object() {BuildTimesheetCancelButtonRow(draftId)}})
-                SendTelegramMessageWithReplyMarkup(chatId, "Nessun cliente trovato. Prova con un'altra parola.", cancelKeyboard)
+                SendTimesheetMessageWithReplyMarkup(chatId, "Nessun cliente trovato. Prova con un'altra parola.", cancelKeyboard)
                 Exit Sub
             End If
 
             AddTimesheetCancelButton(keyboard, draftId)
-            SendTelegramMessageWithReplyMarkup(chatId, "Seleziona il cliente trovato.", JsonConvert.SerializeObject(New With {.inline_keyboard = keyboard}))
+            SendTimesheetMessageWithReplyMarkup(chatId, "Seleziona il cliente trovato.", JsonConvert.SerializeObject(New With {.inline_keyboard = keyboard}))
         End Sub
 
         Private Sub SaveTimesheetDraft(ByVal chatId As String, ByVal draftId As String)

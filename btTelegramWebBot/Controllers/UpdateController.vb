@@ -1186,11 +1186,10 @@ Namespace btTelegramWebBot.Controllers
             Dim soggettiCodice = draft.Rows(0).Item("SoggettiCodice").ToString()
             Dim connectionString = GetCompanyConnectionString(azienda)
             Dim keyboard As New List(Of Object)
-            Dim sql = "select TOP 5 C.ClientiCodice, C.ClientiRagioneSociale, max(R.RapportiData) as DataUltimoIntervento " &
-                      " from Rapporti R inner join ClientiSedi S on S.ClientiSediCodice = R.RapportiCodiceClienteSede " &
-                      " inner join Clienti C on C.ClientiCodice = S.ClientiSediCodiceCliente " &
-                      " where R.RapportiData >= '20210101' and R.RapportiCodiceSoggetto = ? and C.ClientiCodice <> 99999 and C.ClientiStato <> 'A' " &
-                      " group by C.ClientiCodice, C.ClientiRagioneSociale order by DataUltimoIntervento desc "
+            Dim sql = "select TOP 5 C.ClientiCodice, C.ClientiRagioneSociale, max(R.RapportiData) as DataUltimoIntervento, max(R.RapportiCodice) as UltimoRapportiCodice " &
+                      " from Rapporti R inner join Clienti C on C.ClientiCodice = R.RapportiCodiceCliente " &
+                      " where R.RapportiStato <> 'A' and R.RapportiData >= '20210101' and R.RapportiCodiceSoggetto = ? and C.ClientiCodice <> 99999 and C.ClientiStato <> 'A' " &
+                      " group by C.ClientiCodice, C.ClientiRagioneSociale order by DataUltimoIntervento desc, UltimoRapportiCodice desc "
 
             Using cn As New OleDbConnection(connectionString)
                 cn.Open()

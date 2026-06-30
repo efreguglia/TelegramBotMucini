@@ -368,7 +368,11 @@ Namespace btTelegramWebBot.Controllers
                     Case "WLA"
                         RichiediWorkLocationAltro(update.CallbackQuery.Message.Chat.Id.ToString(), valori(1).Trim())
                     Case "TS_START"
-                        StartTimesheetDraft(update.CallbackQuery.Message.Chat.Id.ToString())
+                        If valori.Length > 1 Then
+                            StartTimesheetDraftFromReminder(update.CallbackQuery.Message.Chat.Id.ToString(), valori(1).Trim())
+                        Else
+                            StartTimesheetDraft(update.CallbackQuery.Message.Chat.Id.ToString())
+                        End If
                     Case "TS_DATE"
                         TimesheetSetDate(update.CallbackQuery.Message.Chat.Id.ToString(), valori(1).Trim(), valori(2).Trim())
                     Case "TS_DATE_OTHER"
@@ -856,7 +860,7 @@ Namespace btTelegramWebBot.Controllers
                                     Dim reminderId = reminderIds(0)
                                     Try
                                         Dim text = GetRandomTimesheetReminderText(soprannome, oreInserite)
-                                        Dim keyboard = JsonConvert.SerializeObject(New With {.inline_keyboard = New Object() {New Object() {New With {.text = "Inserisci rapportino", .callback_data = "TS_START"}}}})
+                                        Dim keyboard = JsonConvert.SerializeObject(New With {.inline_keyboard = New Object() {New Object() {New With {.text = "Inserisci rapportino", .callback_data = "TS_START||" & reminderId.ToString()}}}})
                                         Dim messageId = SendTelegramMessageWithReplyMarkup(chatId, text, keyboard)
                                         AggiornaTimesheetReminderMessageId(reminderId, messageId)
                                         sent += 1
@@ -1082,6 +1086,28 @@ Namespace btTelegramWebBot.Controllers
 
             Dim soggettiCodice = AUT00.Rows(0).Item("SoggettiCodice").ToString()
             Dim azienda = AUT00.Rows(0).Item("Azienda").ToString()
+            StartTimesheetDraftForUser(chatId, soggettiCodice, azienda)
+        End Sub
+
+        Private Sub StartTimesheetDraftFromReminder(ByVal chatId As String, ByVal reminderId As String)
+            Using cn As New OleDbConnection(ConfigurationManager.AppSettings("connBT").ToString())
+                cn.Open()
+                Using cmd As New OleDbCommand("select SoggettiCodice, Azienda from TelegramBotTimesheetReminders where TelegramBotTimesheetReminderId = ? and ChatId = ?", cn)
+                    cmd.Parameters.AddWithValue("@p1", reminderId)
+                    cmd.Parameters.AddWithValue("@p2", chatId)
+                    Using rs = cmd.ExecuteReader()
+                        If rs.Read() Then
+                            StartTimesheetDraftForUser(chatId, rs.Item("SoggettiCodice").ToString(), rs.Item("Azienda").ToString())
+                            Exit Sub
+                        End If
+                    End Using
+                End Using
+            End Using
+
+            StartTimesheetDraft(chatId)
+        End Sub
+
+        Private Sub StartTimesheetDraftForUser(ByVal chatId As String, ByVal soggettiCodice As String, ByVal azienda As String)
             Dim draftId = CreateTimesheetDraft(chatId, soggettiCodice, azienda)
             SendTimesheetDateChoices(chatId, draftId.ToString())
         End Sub

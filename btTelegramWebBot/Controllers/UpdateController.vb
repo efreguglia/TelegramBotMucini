@@ -1257,7 +1257,7 @@ Namespace btTelegramWebBot.Controllers
             Dim clientiCodice = draft.Rows(0).Item("ClientiCodice").ToString()
             Dim connectionString = GetCompanyConnectionString(azienda)
             Dim keyboard As New List(Of Object)
-            Dim sql = "select TOP 10 ClientiSediCodice, ClientiSediDescrizione from ClientiSedi where ClientiSediCodiceCliente = ? and ClientiSediStato <> 'A' order by ClientiSediDescrizione"
+            Dim sql = "select ClientiSediCodice, ClientiSediDescrizione from ClientiSedi where ClientiSediCodiceCliente = ? and ClientiSediStato <> 'A' order by ClientiSediDescrizione"
 
             Using cn As New OleDbConnection(connectionString)
                 cn.Open()

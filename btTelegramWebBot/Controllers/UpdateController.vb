@@ -1039,8 +1039,12 @@ Namespace btTelegramWebBot.Controllers
         Private Function GetCurrentTimesheetReminderSlot(ByVal dataOraInvio As DateTime, ByVal isTestMode As Boolean) As String
             If isTestMode Then Return dataOraInvio.ToString("HHmm")
 
-            Dim slot = dataOraInvio.ToString("HHmm")
-            If GetOfficialTimesheetReminderSlots().Contains(slot) Then Return slot
+            Dim retryUntilMinutes = GetTimesheetReminderRetryUntilMinutes()
+            For Each slot In GetOfficialTimesheetReminderSlots()
+                Dim slotStart = SlotToTimeSpan(slot)
+                Dim slotEnd = slotStart.Add(New TimeSpan(0, retryUntilMinutes, 59))
+                If dataOraInvio.TimeOfDay >= slotStart AndAlso dataOraInvio.TimeOfDay <= slotEnd Then Return slot
+            Next
 
             Return ""
         End Function

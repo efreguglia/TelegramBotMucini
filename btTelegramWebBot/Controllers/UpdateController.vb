@@ -132,6 +132,164 @@ Namespace btTelegramWebBot.Controllers
             End Try
         End Function
 
+        ' GET api/reminders/recentclientscache
+        ' Aggiorna la cache dei clienti recenti usata dal flusso rapportini.
+        <HttpGet>
+        <Route("api/reminders/recentclientscache")>
+        Public Function RefreshRecentClientsCache(Optional ByVal key As String = "", Optional ByVal days As Integer = 15, Optional ByVal full As Boolean = False) As IHttpActionResult
+            Dim configuredKey = ConfigurationManager.AppSettings("ReminderApiKey")
+            If Not String.IsNullOrEmpty(configuredKey) AndAlso Not String.Equals(configuredKey, key) Then
+                Return MyBase.Unauthorized()
+            End If
+
+            Try
+                If days < 1 Then days = 15
+
+                Dim updated = 0
+                updated += RefreshRecentClientsCacheForCompany("BestTool", ConfigurationManager.AppSettings("connBT").ToString(), days, full)
+                updated += RefreshRecentClientsCacheForCompany("BestToolService", ConfigurationManager.AppSettings("connBTS").ToString(), days, full)
+                Return MyBase.Ok(New With {.updated = updated, .days = days, .full = full})
+            Catch ex As Exception
+                ScriviLogBot("ERRORE RefreshRecentClientsCache: " & ex.ToString())
+                Return MyBase.InternalServerError(ex)
+            End Try
+        End Function
+
+        Private Function RefreshRecentClientsCacheForCompany(ByVal azienda As String, ByVal sourceConnectionString As String, ByVal days As Integer, ByVal full As Boolean) As Integer
+            Dim data As DataTable
+
+            If full Then
+                DeleteRecentClientsCacheForCompany(azienda)
+                data = LoadRecentClientsForCache(sourceConnectionString, "20210101", 10)
+            Else
+                Dim cutoffDate = Date.Today.AddDays(-days).ToString("yyyyMMdd")
+                data = LoadRecentClientsForCache(sourceConnectionString, cutoffDate, 5)
+            End If
+
+            Dim updated = UpsertRecentClientsCacheRows(azienda, data)
+            TrimRecentClientsCache(azienda, GetSubjectsFromRecentClientsCacheData(data), 10)
+            Return updated
+        End Function
+
+        Private Function LoadRecentClientsForCache(ByVal connectionString As String, ByVal fromDate As String, ByVal maxClientsPerSubject As Integer) As DataTable
+            Dim table As New DataTable()
+            Dim sql = "select RapportiCodiceSoggetto, ClientiCodice, ClientiRagioneSociale, DataUltimoIntervento, UltimoRapportiCodice " &
+                      " from (" &
+                      "     select X.*, row_number() over (partition by X.RapportiCodiceSoggetto order by X.DataUltimoIntervento desc, X.UltimoRapportiCodice desc) as RowNumber " &
+                      "     from (" &
+                      "         select R.RapportiCodiceSoggetto, C.ClientiCodice, C.ClientiRagioneSociale, " &
+                      "                max(R.RapportiData) as DataUltimoIntervento, max(R.RapportiCodice) as UltimoRapportiCodice " &
+                      "         from Rapporti R inner join Clienti C on C.ClientiCodice = R.RapportiCodiceCliente " &
+                      "         where R.RapportiStato <> 'A' and R.RapportiData >= ? and R.RapportiCodiceSoggetto is not null " &
+                      "           and C.ClientiCodice <> 99999 and C.ClientiStato <> 'A' " &
+                      "         group by R.RapportiCodiceSoggetto, C.ClientiCodice, C.ClientiRagioneSociale " &
+                      "     ) X " &
+                      " ) Ranked where RowNumber <= ?"
+
+            Using cn As New OleDbConnection(connectionString)
+                cn.Open()
+                Using cmd As New OleDbCommand(sql, cn)
+                    cmd.Parameters.AddWithValue("@p1", fromDate)
+                    cmd.Parameters.AddWithValue("@p2", maxClientsPerSubject)
+                    Using adapter As New OleDbDataAdapter(cmd)
+                        adapter.Fill(table)
+                    End Using
+                End Using
+            End Using
+
+            Return table
+        End Function
+
+        Private Sub DeleteRecentClientsCacheForCompany(ByVal azienda As String)
+            Using cn As New OleDbConnection(ConfigurationManager.AppSettings("connBT").ToString())
+                cn.Open()
+                Using cmd As New OleDbCommand("delete from TelegramBotRecentClientsCache where Azienda = ?", cn)
+                    cmd.Parameters.AddWithValue("@p1", azienda)
+                    cmd.ExecuteNonQuery()
+                End Using
+            End Using
+        End Sub
+
+        Private Function UpsertRecentClientsCacheRows(ByVal azienda As String, ByVal data As DataTable) As Integer
+            If data Is Nothing OrElse data.Rows.Count = 0 Then Return 0
+
+            Dim updated = 0
+            Using cn As New OleDbConnection(ConfigurationManager.AppSettings("connBT").ToString())
+                cn.Open()
+                For Each row As DataRow In data.Rows
+                    Dim updateSql = "update TelegramBotRecentClientsCache set ClientiRagioneSociale = ?, DataUltimoIntervento = ?, UltimoRapportiCodice = ?, UpdatedAt = ? " &
+                                    " where Azienda = ? and SoggettiCodice = ? and ClientiCodice = ?"
+                    Using cmd As New OleDbCommand(updateSql, cn)
+                        cmd.Parameters.AddWithValue("@p1", row.Item("ClientiRagioneSociale").ToString())
+                        cmd.Parameters.AddWithValue("@p2", Convert.ToDateTime(row.Item("DataUltimoIntervento")))
+                        cmd.Parameters.AddWithValue("@p3", Convert.ToInt32(row.Item("UltimoRapportiCodice")))
+                        cmd.Parameters.AddWithValue("@p4", Date.Now)
+                        cmd.Parameters.AddWithValue("@p5", azienda)
+                        cmd.Parameters.AddWithValue("@p6", Convert.ToInt32(row.Item("RapportiCodiceSoggetto")))
+                        cmd.Parameters.AddWithValue("@p7", Convert.ToInt32(row.Item("ClientiCodice")))
+                        If cmd.ExecuteNonQuery() > 0 Then
+                            updated += 1
+                            Continue For
+                        End If
+                    End Using
+
+                    Dim insertSql = "insert into TelegramBotRecentClientsCache (Azienda, SoggettiCodice, ClientiCodice, ClientiRagioneSociale, DataUltimoIntervento, UltimoRapportiCodice, UpdatedAt) " &
+                                    " values (?, ?, ?, ?, ?, ?, ?)"
+                    Using cmd As New OleDbCommand(insertSql, cn)
+                        cmd.Parameters.AddWithValue("@p1", azienda)
+                        cmd.Parameters.AddWithValue("@p2", Convert.ToInt32(row.Item("RapportiCodiceSoggetto")))
+                        cmd.Parameters.AddWithValue("@p3", Convert.ToInt32(row.Item("ClientiCodice")))
+                        cmd.Parameters.AddWithValue("@p4", row.Item("ClientiRagioneSociale").ToString())
+                        cmd.Parameters.AddWithValue("@p5", Convert.ToDateTime(row.Item("DataUltimoIntervento")))
+                        cmd.Parameters.AddWithValue("@p6", Convert.ToInt32(row.Item("UltimoRapportiCodice")))
+                        cmd.Parameters.AddWithValue("@p7", Date.Now)
+                        cmd.ExecuteNonQuery()
+                        updated += 1
+                    End Using
+                Next
+            End Using
+
+            Return updated
+        End Function
+
+        Private Function GetSubjectsFromRecentClientsCacheData(ByVal data As DataTable) As List(Of Integer)
+            Dim subjects As New List(Of Integer)
+            If data Is Nothing Then Return subjects
+
+            For Each row As DataRow In data.Rows
+                Dim soggettiCodice = Convert.ToInt32(row.Item("RapportiCodiceSoggetto"))
+                If Not subjects.Contains(soggettiCodice) Then subjects.Add(soggettiCodice)
+            Next
+
+            Return subjects
+        End Function
+
+        Private Sub TrimRecentClientsCache(ByVal azienda As String, ByVal soggetti As List(Of Integer), ByVal maxClientsPerSubject As Integer)
+            If soggetti Is Nothing OrElse soggetti.Count = 0 Then Exit Sub
+
+            Using cn As New OleDbConnection(ConfigurationManager.AppSettings("connBT").ToString())
+                cn.Open()
+                For Each soggettiCodice In soggetti
+                    Dim sql = "delete from TelegramBotRecentClientsCache " &
+                              " where Azienda = ? and SoggettiCodice = ? and TelegramBotRecentClientsCacheId not in (" &
+                              "     select TelegramBotRecentClientsCacheId from (" &
+                              "         select top " & maxClientsPerSubject.ToString() & " TelegramBotRecentClientsCacheId " &
+                              "         from TelegramBotRecentClientsCache " &
+                              "         where Azienda = ? and SoggettiCodice = ? " &
+                              "         order by DataUltimoIntervento desc, UltimoRapportiCodice desc" &
+                              "     ) KeepRows" &
+                              " )"
+                    Using cmd As New OleDbCommand(sql, cn)
+                        cmd.Parameters.AddWithValue("@p1", azienda)
+                        cmd.Parameters.AddWithValue("@p2", soggettiCodice)
+                        cmd.Parameters.AddWithValue("@p3", azienda)
+                        cmd.Parameters.AddWithValue("@p4", soggettiCodice)
+                        cmd.ExecuteNonQuery()
+                    End Using
+                Next
+            End Using
+        End Sub
+
         Private Function SetLogPath() As String
             Dim path = ConfigurationManager.AppSettings("logPath").ToString()
             Dim pathAnno = IO.Path.Combine(path, Date.Today.Year.ToString())
@@ -1212,6 +1370,47 @@ Namespace btTelegramWebBot.Controllers
             Dim soggettiCodice = draft.Rows(0).Item("SoggettiCodice").ToString()
             Dim connectionString = GetCompanyConnectionString(azienda)
             Dim keyboard As New List(Of Object)
+
+            If LoadTimesheetClientChoicesFromCache(keyboard, draftId, azienda, soggettiCodice) = 0 Then
+                LoadTimesheetClientChoicesFromReports(keyboard, draftId, connectionString, soggettiCodice)
+            End If
+
+            keyboard.Add(New List(Of Object) From {New With {.text = "Altro cliente...", .callback_data = "TS_CLIENT_SEARCH||" & draftId}})
+            AddTimesheetCancelButton(keyboard, draftId)
+
+            Dim dataRapporto = Convert.ToDateTime(draft.Rows(0).Item("RapportiData")).ToString("dd/MM/yyyy")
+            SendTimesheetMessageWithReplyMarkup(chatId, "Data rapportino: " & dataRapporto & ". Scegli il cliente.", JsonConvert.SerializeObject(New With {.inline_keyboard = keyboard}))
+        End Sub
+
+        Private Function LoadTimesheetClientChoicesFromCache(ByVal keyboard As List(Of Object), ByVal draftId As String, ByVal azienda As String, ByVal soggettiCodice As String) As Integer
+            Dim count = 0
+            Dim sql = "select top 5 ClientiCodice, ClientiRagioneSociale from TelegramBotRecentClientsCache " &
+                      " where Azienda = ? and SoggettiCodice = ? " &
+                      " order by DataUltimoIntervento desc, UltimoRapportiCodice desc"
+
+            Try
+                Using cn As New OleDbConnection(ConfigurationManager.AppSettings("connBT").ToString())
+                    cn.Open()
+                    Using cmd As New OleDbCommand(sql, cn)
+                        cmd.Parameters.AddWithValue("@p1", azienda)
+                        cmd.Parameters.AddWithValue("@p2", soggettiCodice)
+                        Using rs = cmd.ExecuteReader()
+                            Do While rs.Read()
+                                AddTimesheetClientChoice(keyboard, draftId, rs.Item("ClientiCodice").ToString(), rs.Item("ClientiRagioneSociale").ToString())
+                                count += 1
+                            Loop
+                        End Using
+                    End Using
+                End Using
+            Catch ex As Exception
+                ScriviLogBot("ERRORE lettura TelegramBotRecentClientsCache: " & ex.Message)
+                Return 0
+            End Try
+
+            Return count
+        End Function
+
+        Private Sub LoadTimesheetClientChoicesFromReports(ByVal keyboard As List(Of Object), ByVal draftId As String, ByVal connectionString As String, ByVal soggettiCodice As String)
             Dim sql = "select TOP 5 C.ClientiCodice, C.ClientiRagioneSociale, max(R.RapportiData) as DataUltimoIntervento, max(R.RapportiCodice) as UltimoRapportiCodice " &
                       " from Rapporti R inner join Clienti C on C.ClientiCodice = R.RapportiCodiceCliente " &
                       " where R.RapportiStato <> 'A' and R.RapportiData >= '20210101' and R.RapportiCodiceSoggetto = ? and C.ClientiCodice <> 99999 and C.ClientiStato <> 'A' " &
@@ -1223,19 +1422,17 @@ Namespace btTelegramWebBot.Controllers
                     cmd.Parameters.AddWithValue("@p1", soggettiCodice)
                     Using rs = cmd.ExecuteReader()
                         Do While rs.Read()
-                            Dim row As New List(Of Object)
-                            row.Add(New With {.text = rs.Item("ClientiRagioneSociale").ToString(), .callback_data = "TS_CLIENT||" & draftId & "||" & rs.Item("ClientiCodice").ToString()})
-                            keyboard.Add(row)
+                            AddTimesheetClientChoice(keyboard, draftId, rs.Item("ClientiCodice").ToString(), rs.Item("ClientiRagioneSociale").ToString())
                         Loop
                     End Using
                 End Using
             End Using
+        End Sub
 
-            keyboard.Add(New List(Of Object) From {New With {.text = "Altro cliente...", .callback_data = "TS_CLIENT_SEARCH||" & draftId}})
-            AddTimesheetCancelButton(keyboard, draftId)
-
-            Dim dataRapporto = Convert.ToDateTime(draft.Rows(0).Item("RapportiData")).ToString("dd/MM/yyyy")
-            SendTimesheetMessageWithReplyMarkup(chatId, "Data rapportino: " & dataRapporto & ". Scegli il cliente.", JsonConvert.SerializeObject(New With {.inline_keyboard = keyboard}))
+        Private Sub AddTimesheetClientChoice(ByVal keyboard As List(Of Object), ByVal draftId As String, ByVal clientiCodice As String, ByVal clientiRagioneSociale As String)
+            Dim row As New List(Of Object)
+            row.Add(New With {.text = clientiRagioneSociale, .callback_data = "TS_CLIENT||" & draftId & "||" & clientiCodice})
+            keyboard.Add(row)
         End Sub
 
         Private Sub TimesheetAskClientSearch(ByVal chatId As String, ByVal draftId As String)
